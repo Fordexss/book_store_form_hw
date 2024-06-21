@@ -1,17 +1,13 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>List of books</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-</head>
-<body>
-    <div class="container mt-5">
-        <h1 class="text-center mb-4">List of books</h1>
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            {% for book in books %}
+{% extends 'base.html' %}
+
+{% block title %}List of Books{% endblock %}
+
+{% block content %}
+    <h1 class="text-center mb-4">List of Books</h1>
+    <div class="d-flex justify-content-end mb-4">
+    </div>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for book in books %}
             <div class="col">
                 <div class="card h-100 shadow-sm">
                     <div class="card-header bg-primary text-white">
@@ -21,18 +17,13 @@
                         <p class="card-text"><strong>Author:</strong> {{ book.author }}</p>
                         <p class="card-text"><strong>Description:</strong> {{ book.description }}</p>
                         <p class="card-text"><strong>Price:</strong> ${{ book.price }}</p>
-                        <p class="card-text"><strong>Date of publication:</strong> {{ book.published_date }}</p>
+                        <p class="card-text"><strong>Date of Publication:</strong> {{ book.published_date|date:"d.m.Y H:i" }}</p>
                         <p class="card-text"><strong>Category:</strong> {{ book.category.name }}</p>
                     </div>
                 </div>
             </div>
-            {% empty %}
-            <p class="text-center">Сорі, книг нема.</p>
-            {% endfor %}
-        </div>
+        {% empty %}
+            <p class="text-center">Sorry, no books available.</p>
+        {% endfor %}
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-            crossorigin="anonymous"></script>
-</body>
-</html>
+{% endblock %}
